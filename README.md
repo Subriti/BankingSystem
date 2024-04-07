@@ -30,7 +30,7 @@ Welcome to the Bank System Project repository! This project aims to develop a co
 
 ### Clone & RUN Source Code
 ```
-git clone git@github.com:ishwors/BankingSystem.git
+git clone git@github.com:Subriti/BankingSystem.git
 ```
 
 <details>
