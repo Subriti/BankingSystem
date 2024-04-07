@@ -2,7 +2,6 @@
 using BankingSystem.API.Entities;
 using BankingSystem.API.Services.IServices;
 using BankingSystem.API.Utilities.CustomAuthorizations;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankingSystem.API.Controllers
@@ -15,7 +14,7 @@ namespace BankingSystem.API.Controllers
     [Produces("application/json")]
     public class TransactionController : ControllerBase
     {
-        private readonly ITransactionService _transactionServices;=
+        private readonly ITransactionService _transactionServices;
 
         /// <summary>
         /// Constructor for TransactionController
@@ -61,9 +60,9 @@ namespace BankingSystem.API.Controllers
         [ProducesResponseType(typeof(Transaction), StatusCodes.Status200OK)]
         [Route("deposit")]
         public async Task<ActionResult<Transaction>> DepositTransaction(DepositTransactionDTO transaction, long accountNumber)
-        {          
+        {
             var depositAccount = await _transactionServices.DepositTransactionAsync(transaction, accountNumber);
-            
+
             return Ok(depositAccount);
         }
 

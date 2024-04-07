@@ -77,9 +77,6 @@ namespace BankingSystem.Test.UnitTests
             signInManagerMock.Setup(sm => sm.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), true, false))
                 .ReturnsAsync(SignInResult.Success);
 
-            passwordHasherMock.Setup(ph => ph.HashPassword(It.IsAny<Users>(), It.IsAny<string>()))
-                .Returns((Users user, string password) => password); // Mock password hashing
-
             // Act
             var result = await userService.RegisterUser(userCreationDTO);
 
