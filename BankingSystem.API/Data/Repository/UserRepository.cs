@@ -89,40 +89,6 @@ namespace BankingSystem.API.Data.Repository
             return null;
         }
 
-        /*public async Task<Users> UpdateUsersAsync(Users finalUser)
-        {
-            var existingUser = await GetUserAsync(finalUser.Id);
-            if (existingUser != null)
-            {
-                // Check and update only the fields that are sent from the UI
-                if (!string.IsNullOrEmpty(finalUser.Fullname) && existingUser.Fullname != finalUser.Fullname)
-                    existingUser.Fullname = finalUser.Fullname;
-
-                if (!string.IsNullOrEmpty(finalUser.UserName) && existingUser.UserName != finalUser.UserName)
-                    existingUser.UserName = finalUser.UserName;
-
-                if (!string.IsNullOrEmpty(finalUser.Email) && existingUser.Email != finalUser.Email)
-                    existingUser.Email = finalUser.Email;
-
-                if (!string.IsNullOrEmpty(finalUser.PhoneNumber) && existingUser.PhoneNumber != finalUser.PhoneNumber)
-                    existingUser.PhoneNumber = finalUser.PhoneNumber;
-
-                if (finalUser.DateOfBirth != new DateTime() && existingUser.DateOfBirth != finalUser.DateOfBirth)
-                    existingUser.DateOfBirth = finalUser.DateOfBirth;
-
-                if (!string.IsNullOrEmpty(finalUser.Address) && existingUser.Address != finalUser.Address)
-                    existingUser.Address = finalUser.Address;
-
-                //update modifiedAt DateTime
-                existingUser.ModifiedAt = DateTime.UtcNow;
-
-                await _context.SaveChangesAsync();
-                return existingUser;
-            }
-            return null;
-        }*/
-
-
         public async Task<Users> UpdateUsersAsync(Users finalUser)
         {
             var existingUser = await GetUserAsync(finalUser.Id);

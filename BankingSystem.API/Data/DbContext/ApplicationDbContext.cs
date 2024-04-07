@@ -21,10 +21,5 @@ namespace BankingSystem.API.Data.DbContext
         public DbSet<Accounts> Account { get; set; }
 
         public DbSet<Transaction> Transactions { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-        }
     }
 }

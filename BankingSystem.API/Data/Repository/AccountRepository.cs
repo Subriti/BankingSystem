@@ -2,7 +2,6 @@
 using BankingSystem.API.Data.Repository.IRepository;
 using BankingSystem.API.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Principal;
 
 namespace BankingSystem.API.Data.Repository
 {
@@ -64,8 +63,6 @@ namespace BankingSystem.API.Data.Repository
             var existingAccount = await GetAccountAsync(accountId);
             if (existingAccount != null)
             {
-              //  existingAccount.Balance = finalaccounts.Balance;
-              //  existingAccount.AtmCardNum = finalaccounts.AtmCardNum;
                 existingAccount.AtmCardPin = accounts.AtmCardPin;
 
                 _context.SaveChanges();
