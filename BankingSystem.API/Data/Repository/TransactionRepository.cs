@@ -1,4 +1,5 @@
-﻿using BankingSystem.API.Data.Repository.IRepository;
+﻿using BankingSystem.API.Data.DbContext;
+using BankingSystem.API.Data.Repository.IRepository;
 using BankingSystem.API.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,13 +11,11 @@ namespace BankingSystem.API.Data.Repository
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Users> _userManager;
-        private RoleManager<IdentityRole<Guid>> _roleManager;
 
-        public TransactionRepository(ApplicationDbContext context, UserManager<Users> userManager, RoleManager<IdentityRole<Guid>> roleManager)
+        public TransactionRepository(ApplicationDbContext context, UserManager<Users> userManager)
         {
             _context = context ?? throw new ArgumentOutOfRangeException(nameof(context));
             _userManager = userManager;
-            _roleManager = roleManager;
         }
 
 

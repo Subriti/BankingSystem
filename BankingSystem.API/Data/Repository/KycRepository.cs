@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using BankingSystem.API.DTOs;
 using AutoMapper;
 using BankingSystem.API.Data.Repository.IRepository;
+using BankingSystem.API.Data.DbContext;
 
 namespace BankingSystem.API.Data.Repository
 {

@@ -23,19 +23,16 @@ namespace BankingSystem.API.Services
 
         private readonly UserManager<Users> _userManager;
         private readonly SignInManager<Users> _signInManager;
-        private readonly IPasswordHasher<Users> _passwordHasher;
 
         private readonly GetLoggedinUser _getLoggedinUser;
 
-        public UserService(IUserRepository userRepository, IMapper mapper, IAccountService accountServices, UserManager<Users> userManager, SignInManager<Users> signInManager, IPasswordHasher<Users> passwordHasher, GetLoggedinUser getLoggedinUser)
+        public UserService(IUserRepository userRepository, IMapper mapper, IAccountService accountServices, UserManager<Users> userManager, SignInManager<Users> signInManager, GetLoggedinUser getLoggedinUser)
         {
             UserRepository = userRepository ?? throw new ArgumentOutOfRangeException(nameof(userRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             AccountServices = accountServices;
             _userManager = userManager;
             _signInManager = signInManager;
-            _passwordHasher = passwordHasher;
-            //_httpContextAccessor = httpContextAccessor;
             _getLoggedinUser = getLoggedinUser;
         }
 
@@ -215,20 +212,20 @@ namespace BankingSystem.API.Services
             return await AddRoleForDisplay(user);
         }
 
-        public async Task<UserInfoDisplayDTO> ResetUserPasswordAsync(string userName, string password)
+        public async Task<UserInfoDisplayDTO> ResetUserPasswordAsync(string username, string password)
         {
-            var existingUser = await _userManager.FindByNameAsync(userName);
+            var existingUser = await _userManager.FindByNameAsync(username);
             // Check if the existing user is null
             if (existingUser == null)
             {
-                throw new Exception($"User with username {userName} not found.");
+                throw new Exception($"User with username {username} not found.");
             }
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(existingUser);
             var result = await _userManager.ResetPasswordAsync(existingUser, token, password);
             if (!result.Succeeded)
             {
-                throw new Exception($"Failed to reset password for user {userName}.");
+                throw new Exception($"Failed to reset password for user {username}.");
             }
 
             var userId = _getLoggedinUser.GetCurrentUserId();

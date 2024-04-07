@@ -15,21 +15,14 @@ namespace BankingSystem.API.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly IAccountService accountServices;
-        private readonly IUserService userServices;
-        private readonly IEmailService emailService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountsController"/> class.
         /// </summary>
         /// <param name="accountServices">The account services.</param>
-        /// <param name="userServices">The user services.</param>
-        /// <param name="_emailService">The email service.</param>
-        public AccountsController(IAccountService accountServices, IUserService userServices, IEmailService _emailService)
+        public AccountsController(IAccountService accountServices)
         {
             this.accountServices = accountServices ?? throw new ArgumentNullException(nameof(accountServices));
-            this.userServices = userServices ?? throw new ArgumentNullException(nameof(userServices));
-            this.emailService = _emailService;
-
         }
 
         /// <summary>

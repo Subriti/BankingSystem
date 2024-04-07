@@ -1,4 +1,5 @@
-﻿using BankingSystem.API.Data.Repository.IRepository;
+﻿using BankingSystem.API.Data.DbContext;
+using BankingSystem.API.Data.Repository.IRepository;
 using BankingSystem.API.DTOs;
 using BankingSystem.API.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -88,7 +89,7 @@ namespace BankingSystem.API.Data.Repository
             return null;
         }
 
-        public async Task<Users> UpdateUsersAsync(Users finalUser)
+        /*public async Task<Users> UpdateUsersAsync(Users finalUser)
         {
             var existingUser = await GetUserAsync(finalUser.Id);
             if (existingUser != null)
@@ -119,6 +120,33 @@ namespace BankingSystem.API.Data.Repository
                 return existingUser;
             }
             return null;
+        }*/
+
+
+        public async Task<Users> UpdateUsersAsync(Users finalUser)
+        {
+            var existingUser = await GetUserAsync(finalUser.Id);
+
+            if (existingUser == null)
+                return null;
+
+            foreach (var property in typeof(Users).GetProperties())
+            {
+                if (property.CanWrite && property.Name != "Id" && property.GetValue(finalUser) != null)
+                {
+                    var newValue = property.GetValue(finalUser);
+                    var existingValue = property.GetValue(existingUser);
+
+                    if (!newValue.Equals(existingValue))
+                    {
+                        property.SetValue(existingUser, newValue);
+                    }
+                }
+            }
+
+            existingUser.ModifiedAt = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+            return existingUser;
         }
 
         public async Task<Users> UpdatePasswordAsync(Users finalUser)

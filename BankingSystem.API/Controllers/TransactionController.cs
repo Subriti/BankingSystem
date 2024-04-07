@@ -15,19 +15,15 @@ namespace BankingSystem.API.Controllers
     [Produces("application/json")]
     public class TransactionController : ControllerBase
     {
-        private readonly ITransactionService _transactionServices;
-        private readonly UserManager<Users> _userManager;
-
+        private readonly ITransactionService _transactionServices;=
 
         /// <summary>
         /// Constructor for TransactionController
         /// </summary>
         /// <param name="transactionServices">Instance of TransactionServices</param>
-        /// <param name="userManager">Instance of UserManager</param>
-        public TransactionController(ITransactionService transactionServices, UserManager<Users> userManager)
+        public TransactionController(ITransactionService transactionServices)
         {
             _transactionServices = transactionServices ?? throw new ArgumentOutOfRangeException(nameof(transactionServices));
-            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
         /// <summary>

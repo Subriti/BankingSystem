@@ -8,9 +8,9 @@ namespace BankingSystem.API.Data.Repository.IRepository
     {
         Task<IEnumerable<KycDocument>> GetKycDocumentAsync();
         Task<KycDocument?> GetKYCIdAsync(Guid KYCId);
-        Task<KycDocument> GetKycByUserIdAsync(Guid Id);
+        Task<KycDocument> GetKycByUserIdAsync(Guid userId);
         Task<KycDocument> AddKycDocumentAsync(KycDocument kycDocument);
-        Task<KycDocument> UpdateKycDocumentAsync(Guid KYCId, KycDocument kycDocument);
+        Task<KycDocument> UpdateKycDocumentAsync(Guid KYCId, KycDocument updatedKycDocument);
         public Task<KycDocument> UpdateKycDocumentAsync(Guid KYCId, JsonPatchDocument<KycDocumentDTO> kycDetails);
     }
 }

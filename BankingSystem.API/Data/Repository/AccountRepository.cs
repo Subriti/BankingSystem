@@ -1,4 +1,5 @@
-﻿using BankingSystem.API.Data.Repository.IRepository;
+﻿using BankingSystem.API.Data.DbContext;
+using BankingSystem.API.Data.Repository.IRepository;
 using BankingSystem.API.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Principal;
@@ -58,29 +59,19 @@ namespace BankingSystem.API.Data.Repository
             _context.SaveChangesAsync();
         }
 
-        public async Task<Accounts> UpdateAccountsAsync(Guid accountId, Accounts finalaccounts)
+        public async Task<Accounts> UpdateAccountsAsync(Guid accountId, Accounts accounts)
         {
             var existingAccount = await GetAccountAsync(accountId);
             if (existingAccount != null)
             {
               //  existingAccount.Balance = finalaccounts.Balance;
               //  existingAccount.AtmCardNum = finalaccounts.AtmCardNum;
-                existingAccount.AtmCardPin = finalaccounts.AtmCardPin;
+                existingAccount.AtmCardPin = accounts.AtmCardPin;
 
                 _context.SaveChanges();
                 return existingAccount;
             }
             return null;
-        }
-
-        public Task<Accounts> AddAccounts(Users users)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Accounts> UpdateAccountAsync(Guid accountId, object finalUser)
-        {
-            throw new NotImplementedException();
         }
     }
 }
